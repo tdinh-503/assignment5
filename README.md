@@ -1,8 +1,10 @@
 # Assignment 4
 
-**Due by 11:59pm on Monday, 5/18/2020**
+**Due by 11:59pm on Monday, 5/24/2021**
 
-**Demo due by 11:59pm on Monday 6/1/2020**
+**Demo due by 11:59pm on Monday 5/31/2021**
+
+***ONLY UPLOAD YOUR bst.c FILE. NO ZIP FILE, NO OTHER UPLOADS, NO DIRECTORY IN UPLOAD***
 
 This assignment is intended to have you start working with binary search trees.  There are several parts to the assignment, each described below.
 
