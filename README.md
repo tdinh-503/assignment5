@@ -60,7 +60,7 @@ There are several unit tests included, and if any unit test failures occur, an e
 
 ## Submission
 
-As always, we'll be using Gradescope for this assignment, and you are to only upload the bst.c file. Just make sure your completed files are committed and pushed by the assignment's deadline to the master branch of the GitHub repo that was created for you by GitHub Classroom. A good way to check whether your files are safely submitted is to look at the master branch of your assignment repo on the github.com website (i.e. https://github.com/OSU-CS261-F18/assignment-3-YourGitHubUsername/). If your changes show up there, you can consider your files submitted.
+As always, we'll be using Gradescope for this assignment, and you are to only upload the bst.c file. 
 
 ## Grading criteria
 
