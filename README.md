@@ -39,7 +39,7 @@ Finally, you will implement an iterator that returns values from a BST in the sa
 * `bst_iterator_has_next()` - should tell the user whether there are more values in the BST to which to iterate
 * `bst_iterator_next()` - should return the next value in the in-order iteration of the BST
 
->Hint: the key to implementing this iterator is figuring out how to perform an in-order traversal non-recursively, since we can't easily break out of a recursion at a specified step once it's started.  Note that you're provided with a stack implementation in stack.h.  Can you use this to mimic the way a recursive in-order traversal visits nodes in a BST?  In particular, can you use a stack to mimic the way function calls are placed on the call stack in a recursive traversal of a BST?
+>Hint: you can make the	bst_iterator as	a stack	of values, that	are the	result of in-order traversal of the BST. You can add the stack values using a recursion over the BST such that the result is in-order traversal and	that the values	would be in ascending order.
 
 ## Testing your work
 
