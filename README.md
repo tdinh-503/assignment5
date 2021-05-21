@@ -39,7 +39,7 @@ Finally, you will implement an iterator that returns values from a BST in the sa
 * `bst_iterator_has_next()` - should tell the user whether there are more values in the BST to which to iterate
 * `bst_iterator_next()` - should return the next value in the in-order iteration of the BST
 
->Hint: you can make the	bst_iterator as	a stack	of values, that	are the	result of in-order traversal of the BST. You can add the stack values using a recursion over the BST such that the result is in-order traversal and	that the values	would be in ascending order.
+>Hint: you can make the	bst_iterator as	a stack	of values, that	are the	result of in-order traversal of the BST. You can add the stack values using a recursion over the BST such that the result is in-order traversal and	that the values	would be in ascending order. You may also want to have a pointer to a bst_node as part of your iterator, so that it can traverse the tree. 
 
 ## Testing your work
 
