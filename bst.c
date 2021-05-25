@@ -362,8 +362,8 @@ int bst_size(struct bst* bst) {
  */
 
 int subtree_height(struct bst_node* node) {
+  int h_right;
   int h_left;
-  int r_left;
   if (node == NULL) {
     return 0;
   }
@@ -383,7 +383,7 @@ int bst_height(struct bst* bst) {
   if (bst->root == NULL) {
     return -1;
   }
-  return subtree_height(bst->root);
+  return subtree_height(bst->root) + 1;
 }
 /*
  * This function should determine whether a given BST contains a path from the
@@ -487,7 +487,7 @@ void bst_iterator_free(struct bst_iterator* iter) {
  *   iter - the iterator to be checked for more values.  May not be NULL.
  */
 int bst_iterator_has_next(struct bst_iterator* iter) {
-  if (stack_istempty(iter->s)) {
+  if (stack_isempty(iter->s)) {
     return 0;
   }
   else {
