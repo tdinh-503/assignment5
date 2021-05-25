@@ -314,7 +314,7 @@ int bst_contains(int val, struct bst* bst) {
  */
 struct bst_iterator {
     struct stack* s;
-}
+};
 
 
 /*
@@ -327,16 +327,6 @@ struct bst_iterator {
  * Return:
  *   Should return the total number of elements stored in bst.
  */
-int bst_size(struct bst* bst) {
-  int size;
-  if (bst->root == NULL) {
-    return 0;
-  }
-  else {
-    size = subtree_size(bst->root);
-    return size;
-  }
-}
 
 int subtree_size(struct bst_node* node) {
   int temp;
@@ -347,6 +337,16 @@ int subtree_size(struct bst_node* node) {
   return temp;
 }
 
+int bst_size(struct bst* bst) {
+  int size;
+  if (bst->root == NULL) {
+    return 0;
+  }
+  else {
+    size = subtree_size(bst->root);
+    return size;
+  }
+}
 
 /*
  * This function should return the height of a given BST, which is the maximum
@@ -360,15 +360,10 @@ int subtree_size(struct bst_node* node) {
  * Return:
  *   Should return the height of bst.
  */
-int bst_height(struct bst* bst) {
-  if (bst->root == NULL) {
-    return -1;
-  }
-  return subtree_height(bst->root);
-}
 
 int subtree_height(struct bst_node* node) {
-  int h_left, r_left;
+  int h_left;
+  int r_left;
   if (node == NULL) {
     return 0;
   }
@@ -384,6 +379,12 @@ int subtree_height(struct bst_node* node) {
   }
 }
 
+int bst_height(struct bst* bst) {
+  if (bst->root == NULL) {
+    return -1;
+  }
+  return subtree_height(bst->root);
+}
 /*
  * This function should determine whether a given BST contains a path from the
  * root to a leaf in which the node values sum to a specified value.
@@ -396,14 +397,6 @@ int subtree_height(struct bst_node* node) {
  *   Should return 1 if bst contains a path from the root to a leaf in which
  *   the values of the nodes add up to sum.  Should return 0 otherwise.
  */
-int bst_path_sum(int sum, struct bst* bst) {
-  if (bst->root == NULL) {
-    return 0;
-  }
-  else {
-    return subtree_sum(sum, bst->root);
-  }
-}
 
 int subtree_sum(int sum, struct bst_node* node) {
   int number = 0;
@@ -423,6 +416,15 @@ int subtree_sum(int sum, struct bst_node* node) {
       number += subtree_sum(subtree_num, node->right);
     }
     return number;
+  }
+}
+
+int bst_path_sum(int sum, struct bst* bst) {
+  if (bst->root == NULL) {
+    return 0;
+  }
+  else {
+    return subtree_sum(sum, bst->root);
   }
 }
 
