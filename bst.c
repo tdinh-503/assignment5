@@ -4,8 +4,8 @@
  * functions for this assignment.  Make sure to add your name and
  * @oregonstate.edu email address below:
  *
- * Name:
- * Email:
+ * Name: Thomas Dinh
+ * Email: dinhtho@oregonstate.edu
  */
 
 #include <stdio.h>
@@ -330,19 +330,23 @@ struct bst_iterator {
 
 int subtree_size(struct bst_node* node) {
   int temp;
+  //check if node ptr exists
   if (node == NULL) {
     return 0;
   }
+  //recursive call to left and right
   temp = subtree_size(node->left) + subtree_size(node->right) +1;
   return temp;
 }
 
 int bst_size(struct bst* bst) {
   int size;
+  //check root node ptr exists
   if (bst->root == NULL) {
     return 0;
   }
   else {
+    //recursive call
     size = subtree_size(bst->root);
     return size;
   }
@@ -364,26 +368,28 @@ int bst_size(struct bst* bst) {
 int subtree_height(struct bst_node* node) {
   int h_right;
   int h_left;
+  //check if node is null
   if (node == NULL) {
     return 0;
   }
   else {
-    h_right = subtree_height(node->right);
-    h_left = subtree_height(node->left);
+    h_right = subtree_height(node->right); //call to right node
+    h_left = subtree_height(node->left); //call to left node
     if (h_right > h_left) {
-      return h_right;
+      return h_right +1; //return larger number
     }
-    else {
-      return h_left;
+    else { //return left otherwise
+      return h_left +1;
     }
   }
 }
 
 int bst_height(struct bst* bst) {
+  //check if NULL
   if (bst->root == NULL) {
-    return -1;
+    return 0;
   }
-  return subtree_height(bst->root) + 1;
+  return subtree_height(bst->root); //call recursive function
 }
 /*
  * This function should determine whether a given BST contains a path from the
@@ -401,30 +407,33 @@ int bst_height(struct bst* bst) {
 int subtree_sum(int sum, struct bst_node* node) {
   int number = 0;
   int subtree_num;
+  //check if node is null
   if (node == NULL) {
     return 0;
   }
   else {
     subtree_num = sum - node->val;
+    //if we hit an empty leaf
     if (subtree_num == 0 && node->right == NULL && node->left == NULL) {
       return 1;
     }
-    if (node->left) {
+    if (node->left) { //recursive call to left node
       number += subtree_sum(subtree_num, node->left);
     }
-    if (node->right) {
+    if (node->right) { //recursive call to right node
       number += subtree_sum(subtree_num, node->right);
     }
-    return number;
+    return number; //after adding lower trees/leaves return the sum up to this node
   }
 }
 
 int bst_path_sum(int sum, struct bst* bst) {
+  //check root is NULL
   if (bst->root == NULL) {
     return 0;
   }
   else {
-    return subtree_sum(sum, bst->root);
+    return subtree_sum(sum, bst->root); //make call to recursive function
   }
 }
 
@@ -441,29 +450,29 @@ int bst_path_sum(int sum, struct bst* bst) {
  *   value in bst (i.e. the leftmost value in the tree).
  */
 struct bst_iterator* bst_iterator_create(struct bst* bst) {
-  struct bst_iterator* iterator = malloc(sizeof(struct bst_iterator));
-  iterator->s = stack_create();
+  struct bst_iterator* iterator = malloc(sizeof(struct bst_iterator)); //create memory
+  iterator->s = stack_create(); //stack_create allocates memory and initialized stack
   int num;
-  while (bst_isempty(bst) == 0) {
-    num = _bst_subtree_min_val(bst->root);
-    stack_push(iterator->s, num);
-    bst_remove(num, bst);
+  while (bst_isempty(bst) == 0) { //while bst isnt empty
+    num = _bst_subtree_min_val(bst->root); //call subtree_min_vall w root node
+    stack_push(iterator->s, num); //push to s value num
+    bst_remove(num, bst); //remove from bst value num
   }
 
-  struct stack* temp1 = stack_create();
-  struct stack* temp2 = stack_create();
-  while (stack_isempty(iterator->s) == 0) {
-    stack_push(temp1, stack_pop(iterator->s));
+  struct stack* temp1 = stack_create(); //use stack_create
+  struct stack* temp2 = stack_create(); //^
+  while (stack_isempty(iterator->s) == 0) { //while s isn't empty
+    stack_push(temp1, stack_pop(iterator->s)); //push from s to temp1
   }
-  while (stack_isempty(temp1) == 0) {
-    stack_push(temp2, stack_pop(temp1));
+  while (stack_isempty(temp1) == 0) { //while temp1 isn't empty
+    stack_push(temp2, stack_pop(temp1)); //push from temp1 to temp2
   }
-  while (stack_isempty(temp2) == 0) {
-    stack_push(iterator->s, stack_pop(temp2));
+  while (stack_isempty(temp2) == 0) { //while temp2 isn't empty
+    stack_push(iterator->s, stack_pop(temp2)); //push to s from temp2
   }
-  stack_free(temp1);
-  stack_free(temp2);
-  return iterator;
+  stack_free(temp1); //free temp stacks
+  stack_free(temp2); //^
+  return iterator; //return finished bst iterator
 }
 
 /*
@@ -473,8 +482,8 @@ struct bst_iterator* bst_iterator_create(struct bst* bst) {
  *   iter - the iterator whose memory is to be freed.  May not be NULL.
  */
 void bst_iterator_free(struct bst_iterator* iter) {
-  stack_free(iter->s);
-  free(iter);
+  stack_free(iter->s); //free memory of member s stack
+  free(iter); //free memory of iterator iter
 }
 
 
@@ -487,10 +496,10 @@ void bst_iterator_free(struct bst_iterator* iter) {
  *   iter - the iterator to be checked for more values.  May not be NULL.
  */
 int bst_iterator_has_next(struct bst_iterator* iter) {
-  if (stack_isempty(iter->s)) {
+  if (stack_isempty(iter->s)) { //if s is empty
     return 0;
   }
-  else {
+  else { //otherwise
     return 1;
   }
 }
@@ -506,7 +515,7 @@ int bst_iterator_has_next(struct bst_iterator* iter) {
  */
 int bst_iterator_next(struct bst_iterator* iter) {
   struct bst_node* temp;
-  if (bst_iterator_has_next(iter) == 1) {
-    return stack_pop(iter->s);
+  if (bst_iterator_has_next(iter) == 1) { //if there exists a next
+    return stack_pop(iter->s); //return from that next
   }
 }
